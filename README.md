@@ -32,3 +32,10 @@ prints
 [simple-env] could not find "USE_TLS", did you mean "EMAIL_USE_TLS"?
 ```
 
+## check if environmental variable is set
+```python
+import simple_env as se
+
+hasState = se.has("STATE")
+# hasState is True if the variable is set to null
+```
