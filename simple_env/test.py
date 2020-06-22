@@ -51,3 +51,8 @@ class GetTestCase(TestCase):
         self.assertEqual(
             output, "[simple-env] could not find EMAIL_USE_TLS. Did you mean USE_TLS?\n"
         )
+
+    def test_string_trimming(self):
+        statement = '''BROWSER="'Chrome'" python3 -c "import __init__ as se; print(se.get('BROWSER') == 'Chrome', end='')"'''
+        output = check_output(statement, cwd="simple_env", shell=True, text=True)
+        self.assertEqual(output, "True")

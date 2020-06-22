@@ -49,11 +49,11 @@ def get(name, debug=False, ignore_warnings=False):
 
     # remove excessive ' quoting
     if value.startswith(SINGLE_QUOTE) and value.endswith(SINGLE_QUOTE):
-        value.strip(SINGLE_QUOTE)
+        value = value.strip(SINGLE_QUOTE)
 
     # remove excessive " quoting
     if value.startswith(DOUBLE_QUOTE) and value.endswith(DOUBLE_QUOTE):
-        value.strip(DOUBLE_QUOTE)
+        value = value.strip(DOUBLE_QUOTE)
 
     if value in ["NULL", "null", "Null", "NONE", "none", "None"]:
         value = None
