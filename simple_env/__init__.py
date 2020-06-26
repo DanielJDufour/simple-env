@@ -37,6 +37,18 @@ def trim(value):
             value = value.strip(DOUBLE_QUOTE)
     return value
 
+def clean(value):
+    if value in [None, "NULL", "null", "Null", "NONE", "none", "None"]:
+        return None
+    elif value in ["True", "true", "TRUE"]:
+        return True
+    elif value in ["False", "false", "FALSE"]:
+        return False
+    elif value.isdigit():
+        return int(value)
+    else:
+        return value
+
 def get(name, debug=False, ignore_warnings=False):
     if debug:
         print("[simple-env] starting get with name: ", name)
@@ -61,14 +73,8 @@ def get(name, debug=False, ignore_warnings=False):
     # remove excessive quoting like value = '"Null"'
     value = trim(value)
 
-    if value in ["NULL", "null", "Null", "NONE", "none", "None"]:
-        value = None
-    elif value in ["True", "true", "TRUE"]:
-        value = True
-    elif value in ["False", "false", "FALSE"]:
-        value = False
-    elif value.isdigit():
-        value = int(value)
+    # convert value to appropriate type
+    value = clean(value)
 
     if debug:
         print("[simple-env] finishing get with value:", value)
