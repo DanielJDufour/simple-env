@@ -11,7 +11,7 @@ setup(
     packages=["simple_env"],
     package_dir={"simple_env": "simple_env"},
     package_data={"simple_env": ["__init__.py"]},
-    version="0.2.0",
+    version="0.2.1",
     description="Super Simple Processing of Environmental Variables",
     long_description=long_description,
     long_description_content_type="text/markdown",

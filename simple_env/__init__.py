@@ -26,6 +26,17 @@ def has(name, debug=False, ignore_warnings=False):
 
     return value is not None
 
+def trim(value):
+    for i in range(2):
+        # remove excessive ' quoting
+        if value.startswith(SINGLE_QUOTE) and value.endswith(SINGLE_QUOTE):
+            value = value.strip(SINGLE_QUOTE)
+
+        # remove excessive " quoting
+        if value.startswith(DOUBLE_QUOTE) and value.endswith(DOUBLE_QUOTE):
+            value = value.strip(DOUBLE_QUOTE)
+    return value
+
 def get(name, debug=False, ignore_warnings=False):
     if debug:
         print("[simple-env] starting get with name: ", name)
@@ -47,13 +58,8 @@ def get(name, debug=False, ignore_warnings=False):
             print(warning)
         return
 
-    # remove excessive ' quoting
-    if value.startswith(SINGLE_QUOTE) and value.endswith(SINGLE_QUOTE):
-        value = value.strip(SINGLE_QUOTE)
-
-    # remove excessive " quoting
-    if value.startswith(DOUBLE_QUOTE) and value.endswith(DOUBLE_QUOTE):
-        value = value.strip(DOUBLE_QUOTE)
+    # remove excessive quoting like value = '"Null"'
+    value = trim(value)
 
     if value in ["NULL", "null", "Null", "NONE", "none", "None"]:
         value = None
