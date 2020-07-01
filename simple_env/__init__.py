@@ -1,7 +1,6 @@
 import os
+from shear import shear
 
-SINGLE_QUOTE = "'"
-DOUBLE_QUOTE = '"'
 
 def has(name, debug=False, ignore_warnings=False):
     if debug:
@@ -26,16 +25,6 @@ def has(name, debug=False, ignore_warnings=False):
 
     return value is not None
 
-def trim(value):
-    for i in range(2):
-        # remove excessive ' quoting
-        if value.startswith(SINGLE_QUOTE) and value.endswith(SINGLE_QUOTE):
-            value = value.strip(SINGLE_QUOTE)
-
-        # remove excessive " quoting
-        if value.startswith(DOUBLE_QUOTE) and value.endswith(DOUBLE_QUOTE):
-            value = value.strip(DOUBLE_QUOTE)
-    return value
 
 def clean(value):
     if value in [None, "NULL", "null", "Null", "NONE", "none", "None"]:
@@ -48,6 +37,7 @@ def clean(value):
         return int(value)
     else:
         return value
+
 
 def get(name, debug=False, ignore_warnings=False):
     if debug:
@@ -71,7 +61,7 @@ def get(name, debug=False, ignore_warnings=False):
         return
 
     # remove excessive quoting like value = '"Null"'
-    value = trim(value)
+    value = shear(value)
 
     # convert value to appropriate type
     value = clean(value)

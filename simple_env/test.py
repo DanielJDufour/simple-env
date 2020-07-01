@@ -1,11 +1,13 @@
 from unittest import TestCase
 from subprocess import check_output
 
+
 class HasTestCase(TestCase):
     def test_checking_null(self):
         statement = '''GREETING='null' python3 -c "import __init__ as se; print(se.has('GREETING') == True, end='')"'''
         output = check_output(statement, cwd="simple_env", shell=True, text=True)
-        self.assertEqual(output, 'True')
+        self.assertEqual(output, "True")
+
 
 class GetTestCase(TestCase):
     def test_getting_string(self):
