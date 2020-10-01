@@ -11,7 +11,7 @@ setup(
     packages=["simple_env"],
     package_dir={"simple_env": "simple_env"},
     package_data={"simple_env": ["__init__.py"]},
-    version="0.3.0",
+    version="0.4.0",
     description="Super Simple Processing of Environmental Variables",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -26,5 +26,5 @@ setup(
         "License :: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
         "Operating System :: OS Independent",
     ],
-    install_requires=[],
+    install_requires=["shear"],
 )
